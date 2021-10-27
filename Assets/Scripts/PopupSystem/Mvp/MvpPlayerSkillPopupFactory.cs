@@ -4,17 +4,15 @@ using UnityEngine;
 
 namespace Assets.Scripts.PopupSystem.Mvp
 {
-    public class MvpPlayerSkillPopupFactory : PlayerSkillsPopupFactoryBase<MvpPopupSystem>
+    public class MvpPlayerSkillPopupFactory : PlayerSkillsPopupFactoryBase
     {
         public MvpPlayerSkillPopupFactory(Object playerSkillsPopupPrefabRef, PlayerSkillsModel model) : base(playerSkillsPopupPrefabRef, model) { }
 
-        public override void Create(RectTransform parentTransform)
+        protected override void LinkedComponents(GameObject popupInstance)
         {
-            var popupInstance = (GameObject)Object.Instantiate(_popupPrefabRef, parentTransform);
             var mvpView = popupInstance.GetComponent<MvpPlayerSkillsPopupView>();
 
             var presenter = new PlayerSkillsPopupPresenter(mvpView, _model);
-
         }
     }
 }

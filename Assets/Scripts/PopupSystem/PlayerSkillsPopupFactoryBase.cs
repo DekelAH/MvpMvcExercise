@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.PopupSystem
 {
-    public abstract class PlayerSkillsPopupFactoryBase<T>
-        where T : new()
+    public abstract class PlayerSkillsPopupFactoryBase
     {
         protected Object _popupPrefabRef;
         protected PlayerSkillsModel _model;
@@ -15,6 +14,12 @@ namespace Assets.Scripts.PopupSystem
             _model = model;
         }
 
-        public abstract void Create(RectTransform parentTransform);
+        public void Create(RectTransform parentTransform)
+        {
+            var popupInstance = (GameObject)Object.Instantiate(_popupPrefabRef, parentTransform);
+            LinkedComponents(popupInstance);
+        }
+
+        protected abstract void LinkedComponents(GameObject popupInstance);
     }
 }
